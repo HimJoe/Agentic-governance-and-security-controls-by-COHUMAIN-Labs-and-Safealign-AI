@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/cohumain-logo.png" width="84" alt="COHUMAIN Labs"/> &nbsp;&nbsp; <img src="docs/assets/safealign-logo.png" width="84" alt="SafeAlign AI"/>
+<img src="assets/images/cohumain-logo.png" width="84" alt="COHUMAIN Labs"/> &nbsp;&nbsp; <img src="assets/images/safealign-logo.png" width="84" alt="SafeAlign AI"/>
 
 # Agentic Governance &amp; Security Controls
 ### by COHUMAIN Labs &amp; SafeAlign AI
@@ -21,7 +21,7 @@
 
 ## Overview
 
-![Agentic Governance & Security Controls, one-page overview](docs/assets/COHUMAIN_AGSC_v1.png)
+![Agentic Governance & Security Controls, one-page overview](assets/images/COHUMAIN_AGSC_v1.png)
 
 ## TL;DR
 
