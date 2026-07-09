@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/cohumain-logo.png" width="84" alt="COHUMAIN Labs"/> &nbsp;&nbsp; <img src="docs/assets/safealign-logo.png" width="84" alt="SafeAlign AI"/>
+<img src="./COHUMAIN-AGSC-repo/docs/assets/cohumain-logo.png" width="84" alt="COHUMAIN Labs"/> &nbsp;&nbsp; <img src="./COHUMAIN-AGSC-repo/docs/assets/safealign-logo.png" width="84" alt="SafeAlign AI"/>
 
 # Agentic Governance &amp; Security Controls
 ### by COHUMAIN Labs &amp; SafeAlign AI
@@ -13,7 +13,7 @@
 [![Pillars](https://img.shields.io/badge/pillars-S|A|G|S-1F7DF0?style=flat-square)](#-the-four-pillars--sags)
 [![Maps to](https://img.shields.io/badge/maps%20to-MIT%20|%20MITRE%20|%20EU%20AI%20Act-1F7DF0?style=flat-square)](#-mapped-to-the-frameworks-that-matter)
 
-[**🌐 Website**](https://himjoe.github.io/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/) | [**📖 Full control catalog**](./controls/CONTROLS.md) | [**🤝 Contribute**](./CONTRIBUTING.md)
+[**🌐 Website**](https://himjoe.github.io/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/) | [**📖 Full control catalog**](./controls/CONTROLS.md) | [**🤝 Contributing**](./CONTRIBUTING.md)
 
 </div>
 
@@ -21,13 +21,13 @@
 
 ## Overview
 
-![Agentic Governance & Security Controls, one-page overview](docs/assets/COHUMAIN_AGSC_v1.png)
+![Agentic Governance & Security Controls, one-page overview](./COHUMAIN-AGSC-repo/docs/assets/COHUMAIN_AGSC_v1.png)
 
 ## TL;DR
 
-For a traditional system, **governance** (is it accountable, documented, overseen?) and **security** (is it protected from attackers?) are separate disciplines run by separate teams. For an **autonomous agent they collapse into one problem**: the same autonomy that creates the governance question, *what is the agent allowed to decide and do?*, is the security question, *what can a compromised agent be made to do?*
+For a traditional system, **governance** (is it accountable, documented, overseen?) and **security** (is it protected from attackers?) are separate disciplines run by separate teams. For an **autonomous agent**, they collapse into one operational problem: **can this system act safely, lawfully, and securely while it is making decisions and taking actions on its own?**
 
-This repository is an **open, vendor-neutral control standard** that answers both at once: **25 controls** across **four pillars** (Safety | Alignment | Governance | Security), each risk-justified, testable, and mapped to the [MIT AI Risk Repository](https://airisk.mit.edu/), [MITRE ATLAS](https://atlas.mitre.org/), [MITRE ATT&amp;CK](https://attack.mitre.org/) (via the [Anthropic LLM ATT&amp;CK Navigator](https://red.anthropic.com/2026/attack-navigator/)), and the **EU AI Act / NIST AI RMF / ISO 42001**.
+This repository is an **open, vendor-neutral control standard** that answers both at once: **25 controls** across **four pillars** (Safety | Alignment | Governance | Security), each risk-justified, evidence-based, and mapped to the frameworks enterprises already use.
 
 > Built by [**COHUMAIN Labs**](https://www.cohumain.ai/research) (responsible-AI research) and [**SafeAlign AI**](https://safealignai.io/) (govern, monitor &amp; secure AI agents at enterprise scale).
 
@@ -37,9 +37,9 @@ This repository is an **open, vendor-neutral control standard** that answers bot
 
 | | What changes with agentic AI |
 |---|---|
-| **1, The failure mode inverts** | Traditional IT fails by *stopping*. An agent fails by *continuing*, fully operational, acting wrongly, at machine speed, across systems before a human reacts. The safe state is **"stopped," not "restored."** |
+| **1, The failure mode inverts** | Traditional IT fails by *stopping*. An agent fails by *continuing*, fully operational, acting wrongly, at machine speed, across systems before a human reacts. This creates a safety and governance issue, not merely a cybersecurity issue. |
 | **2, The model is the attack surface** | Prompt injection is an attack written in plain language *inside data*, invisible to code scanning. The agent's own reasoning becomes the exploit path. |
-| **3, Orchestration is the risk, not skill** | Across **832 real-world malicious actors** (Anthropic, 2026), the highest-risk operations were distinguished **not** by technical sophistication or number of techniques, but by AI agents **autonomously chaining attack stages together**, a behaviour current threat frameworks have no ID for. |
+| **3, Orchestration is the risk, not skill** | Across **832 real-world malicious actors** (Anthropic, 2026), the highest-risk operations were distinguished **not** by technical sophistication or tool novelty, but by **autonomous, persistent, multi-step orchestration**. |
 
 That third finding is why this standard puts dedicated **autonomy, multi-agent, and threat-modeling controls** at its core, see [the ATT&amp;CK mapping](#-defending-against-the-weaponised-agent).
 
@@ -95,7 +95,7 @@ That third finding is why this standard puts dedicated **autonomy, multi-agent, 
 
 ## 🎯 Defending against the weaponised agent
 
-Each security control is mapped to the **real-world MITRE ATT&amp;CK techniques a hijacked agent would actually execute**, drawn from Anthropic's analysis of AI-enabled cyber operations (832 actors, 13,873 observations).
+Each security control is mapped to the **real-world MITRE ATT&amp;CK techniques a hijacked agent would actually execute**, drawn from Anthropic's analysis of AI-enabled cyber operations (832 actors / 166 techniques) and extended for the missing category of agentic orchestration.
 
 | ATT&amp;CK technique | Observed in | Countered by |
 |---|---|---|
@@ -105,7 +105,7 @@ Each security control is mapped to the **real-world MITRE ATT&amp;CK techniques 
 | `T1562` / `T1021` / `T1020` Evasion, lateral movement, exfil | killchain | `SEC-04` Observability &amp; IR |
 | **Agentic Orchestration** | **highest-risk operations** | `SEC-01`, `SAF-01`, `SEC-05` |
 
-> **The key insight:** autonomous, multi-step, AI-directed killchain orchestration **has no MITRE ATT&amp;CK ID yet.** That taxonomy gap is precisely the agentic risk this standard governs. Full mapping in [`frameworks/mitre-attack.md`](./frameworks/mitre-attack.md).
+> **The key insight:** autonomous, multi-step, AI-directed killchain orchestration **has no MITRE ATT&amp;CK ID yet.** That taxonomy gap is precisely the agentic risk this standard governs. Full mapping: [`frameworks/mitre-attack.md`](./frameworks/mitre-attack.md)
 
 ---
 
@@ -184,7 +184,7 @@ Full index → [cohumain.ai/research](https://www.cohumain.ai/research)
 
 ## 🤝 Contributing
 
-This is an open standard, it improves through use. We welcome practitioners building agent systems, security engineers who red-team them, and governance leads applying it in regulated settings. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`GOVERNANCE.md`](./GOVERNANCE.md). Propose a control or flag a gap via [issues](../../issues).
+This is an open standard, it improves through use. We welcome practitioners building agent systems, security engineers who red-team them, and governance leads applying it in regulated settings. See **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** for how to propose additions, clarifications, and field feedback.
 
 ---
 
@@ -192,7 +192,7 @@ This is an open standard, it improves through use. We welcome practitioners buil
 
 The standard, mappings, and documentation are released under **[CC BY 4.0](./LICENSE)**, free to adopt and adapt with attribution.
 
-Framework attributions are retained to their owners: the **MIT AI Risk Repository** (CC BY, MIT), **MITRE ATLAS** &amp; **ATT&amp;CK** (© The MITRE Corporation), and the **LLM ATT&amp;CK Navigator** findings (© Anthropic). The mappings in this repository are the contribution of COHUMAIN Labs &amp; SafeAlign AI.
+Framework attributions are retained to their owners: the **MIT AI Risk Repository** (CC BY, MIT), **MITRE ATLAS** &amp; **ATT&amp;CK** (© The MITRE Corporation), and the **LLM ATT&amp;CK Navigator** (Anthropic, 2026).
 
 <div align="center">
 
