@@ -8,12 +8,12 @@
 **An open standard that unifies _governance_ and _security_ for agentic &amp; generative AI.**
 
 [![Standard](https://img.shields.io/badge/standard-v1.0.0-1F7DF0?style=flat-square)](https://himjoe.github.io/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/)
-[![License](https://img.shields.io/badge/license-CC%20BY%204.0-6A45C8?style=flat-square)](./LICENSE)
-[![Controls](https://img.shields.io/badge/controls-25-17A45A?style=flat-square)](./controls/CONTROLS.md)
+[![License](https://img.shields.io/badge/license-CC%20BY%204.0-6A45C8?style=flat-square)](./COHUMAIN-AGSC-repo/LICENSE)
+[![Controls](https://img.shields.io/badge/controls-25-17A45A?style=flat-square)](./COHUMAIN-AGSC-repo/controls/CONTROLS.md)
 [![Pillars](https://img.shields.io/badge/pillars-S|A|G|S-1F7DF0?style=flat-square)](#-the-four-pillars--sags)
 [![Maps to](https://img.shields.io/badge/maps%20to-MIT%20|%20MITRE%20|%20EU%20AI%20Act-1F7DF0?style=flat-square)](#-mapped-to-the-frameworks-that-matter)
 
-[**🌐 Website**](https://himjoe.github.io/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/) | [**📖 Full control catalog**](./controls/CONTROLS.md) | [**🤝 Contributing**](./CONTRIBUTING.md)
+[**🌐 Website**](https://himjoe.github.io/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/) | [**📖 Full control catalog**](./COHUMAIN-AGSC-repo/controls/CONTROLS.md) | [**🤝 Contributing**](./CONTRIBUTING.md)
 
 </div>
 
@@ -88,8 +88,8 @@ That third finding is why this standard puts dedicated **autonomy, multi-agent, 
 | `SEC-06` | 🔒 Security | AI Security Testing & Red-Teaming | Adapted | T2 | 2.2 AI system security vulnerabilities and attacks |
 | `SEC-07` | 🔒 Security | Memory & Context Lifecycle Security | AI-Native | T2 | 2.1 Compromise of privacy (leaking / inferring sensitive info) |
 
-➡️ **Full specifications** (key requirements, evidence, risk examples, cadence, complete mappings): **[`controls/CONTROLS.md`](./controls/CONTROLS.md)**
-➡️ **Machine-readable:** [`controls/controls.json`](./controls/controls.json) | [`controls/controls.csv`](./controls/controls.csv)
+➡️ **Full specifications** (key requirements, evidence, risk examples, cadence, complete mappings): **[`controls/CONTROLS.md`](./COHUMAIN-AGSC-repo/controls/CONTROLS.md)**
+➡️ **Machine-readable:** [`controls/controls.json`](./COHUMAIN-AGSC-repo/controls/controls.json) | [`controls/controls.csv`](./controls/controls.csv)
 
 ---
 
@@ -105,7 +105,7 @@ Each security control is mapped to the **real-world MITRE ATT&amp;CK techniques 
 | `T1562` / `T1021` / `T1020` Evasion, lateral movement, exfil | killchain | `SEC-04` Observability &amp; IR |
 | **Agentic Orchestration** | **highest-risk operations** | `SEC-01`, `SAF-01`, `SEC-05` |
 
-> **The key insight:** autonomous, multi-step, AI-directed killchain orchestration **has no MITRE ATT&amp;CK ID yet.** That taxonomy gap is precisely the agentic risk this standard governs. Full mapping: [`frameworks/mitre-attack.md`](./frameworks/mitre-attack.md)
+> **The key insight:** autonomous, multi-step, AI-directed killchain orchestration **has no MITRE ATT&amp;CK ID yet.** That taxonomy gap is precisely the agentic risk this standard governs. Full mapping: [`frameworks/mitre-attack.md`](./COHUMAIN-AGSC-repo/frameworks/mitre-attack.md)
 
 ---
 
@@ -129,10 +129,10 @@ Every control traces to externally-catalogued risk and recognised compliance obl
 
 | Framework | Role | Crosswalk |
 |---|---|---|
-| [**MIT AI Risk Repository**](https://airisk.mit.edu/) | The risk each control closes (7 domains / 24 subdomains) | [`frameworks/mit-ai-risk.md`](./frameworks/mit-ai-risk.md) |
-| [**MITRE ATLAS**](https://atlas.mitre.org/) | Adversarial-ML technique per control | [`frameworks/mitre-atlas.md`](./frameworks/mitre-atlas.md) |
-| [**MITRE ATT&amp;CK** + Anthropic Navigator](https://red.anthropic.com/2026/attack-navigator/) | What a weaponised agent would do | [`frameworks/mitre-attack.md`](./frameworks/mitre-attack.md) |
-| **EU AI Act, NIST AI RMF, ISO/IEC 42001** | Compliance obligation per control | [`frameworks/regulatory-crosswalk.md`](./frameworks/regulatory-crosswalk.md) |
+| [**MIT AI Risk Repository**](https://airisk.mit.edu/) | The risk each control closes (7 domains / 24 subdomains) | [`frameworks/mit-ai-risk.md`](./COHUMAIN-AGSC-repo/frameworks/mit-ai-risk.md) |
+| [**MITRE ATLAS**](https://atlas.mitre.org/) | Adversarial-ML technique per control | [`frameworks/mitre-atlas.md`](./COHUMAIN-AGSC-repo/frameworks/mitre-atlas.md) |
+| [**MITRE ATT&amp;CK** + Anthropic Navigator](https://red.anthropic.com/2026/attack-navigator/) | What a weaponised agent would do | [`frameworks/mitre-attack.md`](./COHUMAIN-AGSC-repo/frameworks/mitre-attack.md) |
+| **EU AI Act, NIST AI RMF, ISO/IEC 42001** | Compliance obligation per control | [`frameworks/regulatory-crosswalk.md`](./COHUMAIN-AGSC-repo/frameworks/regulatory-crosswalk.md) |
 
 ---
 
@@ -158,13 +158,13 @@ Every control traces to externally-catalogued risk and recognised compliance obl
 
 ## 🚀 How to use this standard
 
-1. **Assess.** Take the [control catalog](./controls/CONTROLS.md) and mark each control as *Met / Partial / Gap* for your agent system.
+1. **Assess.** Take the [control catalog](./COHUMAIN-AGSC-repo/controls/CONTROLS.md) and mark each control as *Met / Partial / Gap* for your agent system.
 2. **Pick a tier.** Choose Foundational, Managed, or Assured based on the system's risk and exposure.
 3. **Evidence it.** For each in-scope control, collect the named evidence in its spec, that's what makes conformance auditable rather than assertional.
 4. **Map to your stack.** The mappings tell you which regulatory obligation (EU AI Act article, NIST function, ISO clause) each control satisfies.
 5. **Enforce at runtime.** The controls are platform-agnostic; pair them with a runtime enforcement layer (e.g. SafeAlign AI's monitoring, kill-switch and oversight tooling) to make them live.
 
-The machine-readable [`controls.json`](./controls/controls.json) is designed to be imported directly into GRC tooling, policy engines, or your own conformance tracker.
+The machine-readable [`controls.json`](./COHUMAIN-AGSC-repo/controls/controls.json) is designed to be imported directly into GRC tooling, policy engines, or your own conformance tracker.
 
 ---
 
@@ -190,7 +190,7 @@ This is an open standard, it improves through use. We welcome practitioners buil
 
 ## 📜 License &amp; attribution
 
-The standard, mappings, and documentation are released under **[CC BY 4.0](./LICENSE)**, free to adopt and adapt with attribution.
+The standard, mappings, and documentation are released under **[CC BY 4.0](./COHUMAIN-AGSC-repo/LICENSE)**, free to adopt and adapt with attribution.
 
 Framework attributions are retained to their owners: the **MIT AI Risk Repository** (CC BY, MIT), **MITRE ATLAS** &amp; **ATT&amp;CK** (© The MITRE Corporation), and the **LLM ATT&amp;CK Navigator** (Anthropic, 2026).
 
