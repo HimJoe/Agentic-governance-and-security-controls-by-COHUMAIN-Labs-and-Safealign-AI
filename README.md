@@ -89,7 +89,7 @@ That third finding is why this standard puts dedicated **autonomy, multi-agent, 
 | `SEC-07` | 🔒 Security | Memory & Context Lifecycle Security | AI-Native | T2 | 2.1 Compromise of privacy (leaking / inferring sensitive info) |
 
 ➡️ **Full specifications** (key requirements, evidence, risk examples, cadence, complete mappings): **[`controls/CONTROLS.md`](./COHUMAIN-AGSC-repo/controls/CONTROLS.md)**
-➡️ **Machine-readable:** [`controls/controls.json`](./COHUMAIN-AGSC-repo/controls/controls.json) | [`controls/controls.csv`](./controls/controls.csv)
+➡️ **Machine-readable:** [`controls/controls.json`](./COHUMAIN-AGSC-repo/controls/controls.json) | [`controls/controls.csv`](./COHUMAIN-AGSC-repo/controls/controls.csv)
 
 ---
 
