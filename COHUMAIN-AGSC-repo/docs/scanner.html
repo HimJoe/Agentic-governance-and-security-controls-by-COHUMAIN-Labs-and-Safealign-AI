@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AGSC Conformance Scanner — COHUMAIN Labs & SafeAlign AI</title>
+<meta name="description" content="Interactively scan your agent system against all 25 Agentic Governance & Security Controls and simulate real, MITRE ATT&CK-mapped attack scenarios." />
+<meta property="og:title" content="AGSC Conformance Scanner" />
+<meta property="og:description" content="Mark the controls you have, run an attack scenario, see your exposure and top gaps against the AGSC standard." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#1F7DF0" />
+<link rel="icon" type="image/png" href="assets/cohumain-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#081828; --ink-soft:#26323F; --muted:#5C6B7A; --faint:#8A97A6;
+  --blue:#1F7DF0; --blue-d:#0A63D6; --purple:#6A45C8; --green:#17A45A; --graphite:#2C3A44;
+  --bg:#FFFFFF; --soft:#F5F8FC; --soft2:#ECF2FB; --line:#E4EAF2; --line-2:#D7E0EC;
+  --saf:#E5484D; --aln:#7A4FD6; --gov:#1F7DF0; --sec:#17A45A;
+  --saf-bg:#FCEDED; --aln-bg:#F2ECFC; --gov-bg:#E9F2FE; --sec-bg:#E5F6EE;
+  --native:#E5484D; --adapted:#17A45A;
+  --maxw:1180px; --shadow:0 1px 2px rgba(8,24,40,.04),0 8px 24px rgba(8,24,40,.06);
+  --shadow-lg:0 12px 40px rgba(8,24,40,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink-soft);font-family:'Inter',system-ui,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.gradtext{background:linear-gradient(100deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+section[id],header[id]{scroll-margin-top:82px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand img{height:42px;width:42px;border-radius:50%}
+.brand .bt{font-family:'Poppins';font-weight:700;font-size:16px;letter-spacing:-.02em;line-height:1.05}
+.brand .bt .a{color:var(--blue)} .brand .bt .b{color:var(--ink)}
+.brand .bt small{display:block;font-size:10.5px;font-weight:500;color:var(--faint);letter-spacing:.02em}
+.nav-links{display:flex;gap:26px;align-items:center;font-size:14.5px;color:var(--ink-soft);font-weight:500}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 20px;border-radius:100px;font-weight:600;font-size:13.5px;box-shadow:0 4px 14px rgba(31,125,240,.28)}
+.nav-back{color:var(--muted);font-weight:500}
+.nav-back:hover{color:var(--blue)}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;padding:72px 0 56px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--soft) 100%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(31,125,240,.10) 1px,transparent 0);background-size:30px 30px;mask-image:radial-gradient(ellipse 70% 60% at 75% 25%,#000,transparent 75%);opacity:.7}
+.hero-in{position:relative;z-index:2;max-width:880px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--blue);border:1px solid var(--line-2);background:#fff;padding:7px 15px;border-radius:100px;margin-bottom:26px;box-shadow:var(--shadow)}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(23,164,90,.5);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(23,164,90,.45)}70%{box-shadow:0 0 0 9px rgba(23,164,90,0)}100%{box-shadow:0 0 0 0 rgba(23,164,90,0)}}
+.hero h1{font-size:clamp(30px,4.6vw,50px);font-weight:800;margin-bottom:20px;letter-spacing:-.02em}
+.hero p.lead{font-size:clamp(16px,2vw,18.5px);color:var(--muted);max-width:660px;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:40px}
+.btn{padding:13px 24px;border-radius:100px;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:9px;transition:.15s;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 6px 18px rgba(31,125,240,.30)}
+.btn-primary:hover{background:var(--blue-d);transform:translateY(-1px)}
+.btn-primary:disabled{background:var(--line-2);color:var(--faint);box-shadow:none;cursor:not-allowed;transform:none}
+.btn-ghost{background:#fff;border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-link{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
+.btn-link:hover{color:var(--blue);text-decoration-color:var(--blue)}
+.stat-row{display:flex;gap:14px;flex-wrap:wrap}
+.stat{flex:1;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.stat .n{font-family:'Poppins';font-size:32px;font-weight:800;line-height:1}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:7px}
+.stat.s1 .n{color:var(--blue)} .stat.s2 .n{color:var(--saf)} .stat.s3 .n{color:var(--purple)} .stat.s4 .n{color:var(--green)}
+
+/* cobrand */
+.cobrand{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.cobrand-in{display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center;padding:20px 24px;font-size:13.5px;color:var(--faint)}
+.coorg{display:inline-flex;align-items:center;gap:11px}
+.coorg img{height:40px;width:40px;border-radius:50%;border:1px solid var(--line)}
+.coorg .ct{font-weight:600;color:var(--ink);font-size:14px;line-height:1.2}
+.coorg .ct small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.cobrand .sep{width:1px;height:34px;background:var(--line)}
+
+/* sections */
+section.block{padding:68px 0}
+.soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:36px;max-width:780px}
+.sec-tag{font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-bottom:13px}
+.sec-head h2{font-size:clamp(25px,3.2vw,36px);margin-bottom:13px;letter-spacing:-.02em}
+.sec-head p{color:var(--muted);font-size:16px}
+
+/* chips */
+.chiprow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.chip{background:#fff;border:1px solid var(--line-2);color:var(--ink-soft);padding:8px 16px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;transition:.14s}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.saf.active{background:var(--saf);border-color:var(--saf);color:#fff}
+.chip.aln.active{background:var(--aln);border-color:var(--aln);color:#fff}
+.chip.gov.active{background:var(--gov);border-color:var(--gov);color:#fff}
+.chip.sec.active{background:var(--sec);border-color:var(--sec);color:#fff}
+
+/* control cards (grid) */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.cc{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;transition:.14s;box-shadow:var(--shadow)}
+.cc:hover{border-color:var(--ccpc);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.cc.picked{border-color:var(--ccpc);background:var(--ccbg)}
+.cc .top{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.cc input{width:15px;height:15px;accent-color:var(--ccpc);flex:0 0 auto}
+.cc .cid{font-family:'JetBrains Mono';font-size:11.5px;font-weight:600;color:var(--ccpc);background:var(--ccbg);padding:3px 8px;border-radius:6px}
+.cc .tier{font-size:10px;font-weight:600;color:var(--faint);border:1px solid var(--line-2);padding:2px 6px;border-radius:5px}
+.cc .ntag{font-size:9.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:5px;margin-left:auto}
+.cc .ntag.AI-Native{background:var(--saf-bg);color:var(--native)}
+.cc .ntag.Adapted{background:var(--sec-bg);color:var(--adapted)}
+.cc h4{font-size:14.5px;margin-bottom:7px;line-height:1.25}
+.cc p{font-size:12.5px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* attack simulator */
+.attack{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;background:linear-gradient(120deg,var(--saf-bg),#fff 72%);border:1px solid #F2D4D4;border-radius:20px;padding:34px}
+.attack h3{font-size:21px;margin-bottom:12px}
+.attack p{color:var(--ink-soft);font-size:14.5px;margin-bottom:16px}
+.attack .src{font-size:12px;color:var(--faint);margin-top:12px}
+.scen-group{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.scen-btn{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line-2);border-radius:12px;padding:12px 15px;cursor:pointer;text-align:left;transition:.14s}
+.scen-btn:hover{border-color:var(--saf)}
+.scen-btn.active{border-color:var(--saf);background:var(--saf-bg)}
+.scen-btn .sname{font-weight:600;font-size:14px;color:var(--ink)}
+.scen-btn .scode{font-family:'JetBrains Mono';font-size:10.5px;color:var(--faint)}
+.attack-fig{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;font-family:'JetBrains Mono',monospace;font-size:12.5px;box-shadow:var(--shadow)}
+.attack-fig .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);color:var(--muted);gap:10px}
+.attack-fig .row:last-child{border:0}
+.attack-fig .row b{color:var(--saf)}
+.attack-fig .row .hi{color:var(--blue);font-weight:600}
+.gauge-row{display:flex;align-items:center;gap:16px;margin:6px 0 16px}
+.gauge{position:relative;width:76px;height:76px;flex:0 0 auto}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge-bg{fill:none;stroke:var(--soft2);stroke-width:8}
+.gauge-ring{fill:none;stroke:var(--blue);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .6s ease, stroke .4s ease}
+.gauge-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:800;font-size:18px}
+.gauge-status b{display:block;font-size:15px;font-weight:700;font-family:'Poppins'}
+.gauge-status span{font-size:12px;color:var(--faint)}
+@media(max-width:860px){.attack{grid-template-columns:1fr}}
+
+/* tiers */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tier{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.tier .tbar{position:absolute;top:0;left:0;right:0;height:4px}
+.tier.t1 .tbar{background:#7FB3D5} .tier.t2 .tbar{background:var(--gov)} .tier.t3 .tbar{background:var(--green)}
+.tier .tn{font-family:'Poppins';font-weight:700;font-size:16px;margin-bottom:5px;color:var(--ink)}
+.tier .tnum{font-size:12px;color:var(--faint);margin-bottom:12px;font-family:'JetBrains Mono'}
+.tier p{font-size:13px;color:var(--muted);margin-bottom:14px}
+.tier .tbarbg{height:6px;background:var(--soft2);border-radius:99px;overflow:hidden;margin-bottom:14px}
+.tier .tbarfill{display:block;height:100%;border-radius:99px;transition:width .4s ease}
+.tier.t1 .tbarfill{background:#7FB3D5} .tier.t2 .tbarfill{background:var(--gov)} .tier.t3 .tbarfill{background:var(--green)}
+.tier .bd{font-size:11px;color:var(--faint);border-top:1px solid var(--line);padding-top:12px;font-family:'JetBrains Mono';line-height:1.7}
+@media(max-width:820px){.tiers{grid-template-columns:1fr}}
+
+/* gaps */
+.gaps-wrap{margin-top:30px}
+.gap-empty{background:#fff;border:1px dashed var(--line-2);border-radius:14px;padding:26px;text-align:center;color:var(--muted);font-size:14px}
+.gap-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.gap-card{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.gap-num{font-family:'Poppins';font-weight:800;font-size:18px;color:var(--saf);background:var(--saf-bg);width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.gap-body .cid{font-family:'JetBrains Mono';font-size:11px;font-weight:700;color:var(--muted)}
+.gap-body h4{font-size:15px;margin:4px 0 5px}
+.gap-body p{font-size:13px;color:var(--muted)}
+.results-actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;align-items:center}
+.copy-note{font-size:12.5px;color:var(--green);font-weight:600;opacity:0;transition:.2s}
+.copy-note.show{opacity:1}
+
+/* footer */
+footer{border-top:1px solid var(--line);background:var(--soft);padding:40px 0 30px}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--faint)}
+.foot-bottom a{color:var(--blue)}
+.disclaimer{font-size:12px;color:var(--faint);margin-top:8px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#top" class="brand">
+      <img src="assets/cohumain-logo.png" alt="COHUMAIN Labs" />
+      <span class="bt"><span class="a">AGSC</span> <span class="b">Scanner</span><small>Agentic Governance &amp; Security Controls</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#controls">Controls</a>
+      <a href="#simulator">Simulator</a>
+      <a href="#results">Results</a>
+      <a class="nav-back" href="index.html">← Full standard</a>
+    </div>
+    <a class="nav-cta" href="https://github.com/HimJoe/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI" target="_blank" rel="noopener">★ GitHub</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-in">
+    <span class="eyebrow"><span class="pulse"></span> Interactive Tool | v1.0 | AGSC Conformance Scanner</span>
+    <h1>Scan your agent against <span class="gradtext">all 25 controls</span>.</h1>
+    <p class="lead">Mark the AGSC controls you actually have in place across Safety, Alignment, Governance and Security. Then run an attack scenario mapped to real MITRE ATT&amp;CK techniques and see your exposure and top gaps.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#controls">Start scanning</a>
+      <a class="btn-link" href="https://github.com/HimJoe/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/blob/main/controls/CONTROLS.md" target="_blank" rel="noopener">Full control catalog →</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat s1"><div class="n">25</div><div class="l">Controls scanned</div></div>
+      <div class="stat s2"><div class="n">4</div><div class="l">Pillars, S · A · G · S</div></div>
+      <div class="stat s3"><div class="n">4</div><div class="l">ATT&amp;CK-mapped scenarios</div></div>
+      <div class="stat s4"><div class="n">3</div><div class="l">Conformance tiers</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="cobrand">
+  <div class="cobrand-in">
+    <span>An open collaboration by</span>
+    <a class="coorg" href="https://www.cohumain.ai/research" target="_blank" rel="noopener">
+      <img src="assets/cohumain-logo.png" alt="COHUMAIN Labs" />
+      <span class="ct">COHUMAIN Labs<small>Responsible AI research</small></span>
+    </a>
+    <span class="sep"></span>
+    <a class="coorg" href="https://safealignai.io/" target="_blank" rel="noopener">
+      <img src="assets/safealign-logo.png" alt="SafeAlign AI" />
+      <span class="ct">SafeAlign AI<small>Govern, monitor &amp; secure AI agents</small></span>
+    </a>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<section class="block" id="controls">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">The scan</div>
+      <h2>Mark what's actually in place</h2>
+      <p>Filter by pillar, then check every control your agent system genuinely has, evidenced, not aspirational. You can change these at any time.</p>
+    </div>
+    <div class="chiprow" id="chipRow">
+      <button class="chip active" data-filter="all">All 25</button>
+      <button class="chip saf" data-filter="Safety">🛡️ Safety</button>
+      <button class="chip aln" data-filter="Alignment">🎯 Alignment</button>
+      <button class="chip gov" data-filter="Governance">⚖️ Governance</button>
+      <button class="chip sec" data-filter="Security">🔒 Security</button>
+    </div>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+</section>
+
+<!-- SIMULATOR -->
+<section class="block soft" id="simulator">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Run a scenario</div>
+      <h2>Simulate a real attack</h2>
+      <p>Each scenario is mapped to the MITRE ATT&amp;CK techniques a hijacked agent would actually execute, drawn from Anthropic's analysis of 832 real-world AI-enabled threat actors.</p>
+    </div>
+    <div class="attack">
+      <div>
+        <h3>Choose a scenario</h3>
+        <div class="scen-group" id="scenGroup"></div>
+        <button class="btn btn-primary" id="runBtn" disabled>Run simulation</button>
+        <p class="src">Source: Anthropic LLM ATT&amp;CK Navigator, red.anthropic.com, 2026.</p>
+      </div>
+      <div class="attack-fig">
+        <div class="gauge-row" id="gaugeRow" style="display:none">
+          <div class="gauge">
+            <svg viewBox="0 0 76 76">
+              <circle class="gauge-bg" cx="38" cy="38" r="32"></circle>
+              <circle class="gauge-ring" id="gaugeRing" cx="38" cy="38" r="32" stroke-dasharray="201.1" stroke-dashoffset="201.1"></circle>
+            </svg>
+            <div class="gauge-num" id="gaugeNum">—</div>
+          </div>
+          <div class="gauge-status"><b id="statusText">Awaiting run</b><span>Exposure score</span></div>
+        </div>
+        <div class="row"><span>Scenario</span><b id="figScenario">—</b></div>
+        <div class="row"><span>ATT&amp;CK technique</span><span id="figCode" class="hi">—</span></div>
+        <div class="row"><span>Controls in place</span><span id="figChosen">0 / 25</span></div>
+        <div class="row"><span>Top gap</span><span id="figGap">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="block" id="results">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Where you stand</div>
+      <h2>Conformance &amp; top gaps</h2>
+      <p>Live coverage against the three AGSC conformance tiers, plus the highest-weighted gaps for your last simulation.</p>
+    </div>
+
+    <div class="tiers" id="tiersGrid"></div>
+
+    <div class="gaps-wrap">
+      <div class="gap-empty" id="gapEmpty">Run a simulation above to see your top exposure gaps here.</div>
+      <div class="gap-grid" id="gapGrid" style="display:none"></div>
+      <div class="results-actions" id="resultsActions" style="display:none">
+        <button class="btn btn-ghost" id="copyBtn">Copy results</button>
+        <span class="copy-note" id="copyNote">Copied to clipboard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>An open standard by <a href="https://www.cohumain.ai/research" target="_blank" rel="noopener">COHUMAIN Labs</a> &amp; <a href="https://safealignai.io/" target="_blank" rel="noopener">SafeAlign AI</a>, CC BY 4.0. Full spec: <a href="https://github.com/HimJoe/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/blob/main/controls/CONTROLS.md" target="_blank" rel="noopener">CONTROLS.md</a></span>
+      <span><a href="index.html">← Back to the standard</a></span>
+    </div>
+    <p class="disclaimer">Illustrative self-assessment, not a certified audit or conformance attestation.</p>
+  </div>
+</footer>
+
+<script>
+const CONTROLS = [
+  {id:'SAF-01', k:'SAF01', pillar:'Safety', name:'Autonomous System Oversight', type:'AI-Native', tier:'T1', objective:'Continuously observe autonomous agent behaviour against a defined baseline and enable timely human intervention.'},
+  {id:'SAF-02', k:'SAF02', pillar:'Safety', name:'Emergency Stop & Containment (Kill Switch)', type:'Adapted', tier:'T1', objective:'Provide a single, fast mechanism to halt, contain and isolate an AI system on a safety or security trigger.'},
+  {id:'SAF-03', k:'SAF03', pillar:'Safety', name:'Content Safety & Misuse Prevention', type:'AI-Native', tier:'T1', objective:'Prevent generation of harmful, unsafe or policy-violating content and resist misuse and jailbreaks.'},
+  {id:'SAF-04', k:'SAF04', pillar:'Safety', name:'Output Factual Accuracy & Anti-Hallucination', type:'AI-Native', tier:'T2', objective:'Ensure factual grounding of generative outputs and detect and mitigate hallucination.'},
+  {id:'SAF-05', k:'SAF05', pillar:'Safety', name:'AI Output Monitoring & Safeguards', type:'AI-Native', tier:'T2', objective:'Monitor AI outputs at runtime for bias, harm, hallucination and drift, gating regulated decisions to humans.'},
+  {id:'ALN-01', k:'ALN01', pillar:'Alignment', name:'Autonomy Boundary Control', type:'AI-Native', tier:'T1', objective:'Constrain each agent to an explicit, technically-enforced action space.'},
+  {id:'ALN-02', k:'ALN02', pillar:'Alignment', name:'Human Oversight & Intervention', type:'Adapted', tier:'T1', objective:"Guarantee accessible, timely human review, intervention and override of AI decisions and actions."},
+  {id:'ALN-03', k:'ALN03', pillar:'Alignment', name:'Decision Interpretability', type:'Adapted', tier:'T3', objective:"Provide audience-appropriate explanations for AI outputs affecting people's rights, safety or health."},
+  {id:'ALN-04', k:'ALN04', pillar:'Alignment', name:'Model Explainability', type:'Adapted', tier:'T3', objective:'Make model decision logic explainable for accountability, audit and error-correction.'},
+  {id:'ALN-05', k:'ALN05', pillar:'Alignment', name:'Output Labeling & Action Attribution', type:'Adapted', tier:'T2', objective:'Label AI-generated content and attribute autonomous agent actions to the agent.'},
+  {id:'GOV-01', k:'GOV01', pillar:'Governance', name:'Data Provenance & Input Integrity', type:'Adapted', tier:'T2', objective:'Establish lineage and integrity of training and runtime inputs, including retrieval and tool data.'},
+  {id:'GOV-02', k:'GOV02', pillar:'Governance', name:'AI Change Governance', type:'Adapted', tier:'T2', objective:'Govern behaviour-altering AI changes (model, prompt, data, tool, config) with re-evaluation triggers.'},
+  {id:'GOV-03', k:'GOV03', pillar:'Governance', name:'Third-Party & Supply-Chain Oversight', type:'Adapted', tier:'T3', objective:'Assess and contractually bind AI suppliers and the model supply chain.'},
+  {id:'GOV-04', k:'GOV04', pillar:'Governance', name:'Model Training Governance', type:'Adapted', tier:'T3', objective:'Ensure secure, reproducible, bias-screened model training with documented data lineage.'},
+  {id:'GOV-05', k:'GOV05', pillar:'Governance', name:'Model Evaluation', type:'Adapted', tier:'T2', objective:'Validate model quality, bias, robustness and use-case suitability before deployment.'},
+  {id:'GOV-06', k:'GOV06', pillar:'Governance', name:'Model Continuous Improvement & Drift Management', type:'Adapted', tier:'T3', objective:'Manage production drift with monitoring thresholds and retraining triggers.'},
+  {id:'GOV-07', k:'GOV07', pillar:'Governance', name:'AI Lifecycle & Registry Management', type:'Adapted', tier:'T3', objective:'Version and govern all AI artefacts (model, prompts, tools, memory, agent configs) across the lifecycle.'},
+  {id:'GOV-08', k:'GOV08', pillar:'Governance', name:'Environmental & Carbon Governance', type:'Adapted', tier:'T3', objective:'Estimate and govern the environmental and carbon footprint of AI training, hosting and inference.'},
+  {id:'SEC-01', k:'SEC01', pillar:'Security', name:'Multi-Agent Coordination Security', type:'AI-Native', tier:'T2', objective:'Secure inter-agent communication, hierarchy and emergent behaviour in multi-agent systems.'},
+  {id:'SEC-02', k:'SEC02', pillar:'Security', name:'Agent Identity & Least-Privilege Authorization', type:'Adapted', tier:'T1', objective:'Give each agent a unique identity with just-in-time least-privilege authorization.'},
+  {id:'SEC-03', k:'SEC03', pillar:'Security', name:'Prompt Injection & Adversarial Input Defense', type:'AI-Native', tier:'T1', objective:'Detect and block direct and indirect prompt-injection and adversarial inputs.'},
+  {id:'SEC-04', k:'SEC04', pillar:'Security', name:'Observability, Anomaly Detection & Incident Response', type:'Adapted', tier:'T1', objective:'Emit per-call agent traces, detect behavioural anomalies and run AI-specific incident response.'},
+  {id:'SEC-05', k:'SEC05', pillar:'Security', name:'AI Threat Modeling', type:'Adapted', tier:'T2', objective:'Model AI-specific and agentic-orchestration threats pre-deployment and map them to mitigations.'},
+  {id:'SEC-06', k:'SEC06', pillar:'Security', name:'AI Security Testing & Red-Teaming', type:'Adapted', tier:'T2', objective:'Test AI systems against adversarial, injection, jailbreak and extraction attacks in the release pipeline.'},
+  {id:'SEC-07', k:'SEC07', pillar:'Security', name:'Memory & Context Lifecycle Security', type:'AI-Native', tier:'T2', objective:'Isolate, govern and expire agent memory and context to prevent leakage and poisoned persistence.'}
+];
+const PILLAR_VARS = {
+  Safety:{pc:'var(--saf)', bg:'var(--saf-bg)'},
+  Alignment:{pc:'var(--aln)', bg:'var(--aln-bg)'},
+  Governance:{pc:'var(--gov)', bg:'var(--gov-bg)'},
+  Security:{pc:'var(--sec)', bg:'var(--sec-bg)'}
+};
+const BY_KEY = {}; CONTROLS.forEach(c => BY_KEY[c.k] = c);
+
+const SCENARIOS = {
+  promptInjection:{label:'Prompt Injection', code:'T1190 / T1566 (Initial Access analog)', weights:{SEC03:30, SAF03:20, SAF05:15, ALN02:15, SEC04:10, GOV05:10}},
+  credentialTheft:{label:'Credential Theft', code:'T1078 / T1003 (Valid Accounts / Cred. Dumping)', weights:{SEC02:30, SAF02:20, SEC04:20, GOV07:15, ALN02:15}},
+  lateralMovement:{label:'Lateral Movement & Exfil', code:'T1562 / T1021 / T1020', weights:{SEC04:25, SEC01:20, SEC02:20, ALN01:20, GOV02:15}},
+  orchestration:{label:'Agentic Orchestration', code:'no ATT&CK ID yet (highest-risk)', weights:{SEC01:25, SAF01:25, SEC05:20, SEC06:15, ALN01:15}}
+};
+
+const TIER_META = [
+  {key:'T1', label:'Tier 1 · Foundational', desc:'The core safety and security controls that prevent the highest-severity, fastest-moving failures. The minimum bar for any production agent.'},
+  {key:'T2', label:'Tier 2 · Managed', desc:"Adds governance, alignment and proactive security with defined evidence. Appropriate for material or customer-facing systems."},
+  {key:'T3', label:'Tier 3 · Assured', desc:'The full catalog with continuous conformance and third-party attestation. EU AI Act high-risk readiness.'}
+];
+
+const RISK_TIERS = [
+  {max:19, label:'Hardened', color:'#17A45A'},
+  {max:44, label:'Contained', color:'#1F7DF0'},
+  {max:69, label:'Exposed', color:'#E8823C'},
+  {max:100, label:'Uncontained', color:'#E5484D'}
+];
+function riskTierFor(score){ return RISK_TIERS.find(t => score <= t.max); }
+
+/* ---------- render control cards ---------- */
+const cgrid = document.getElementById('cgrid');
+CONTROLS.forEach(c => {
+  const v = PILLAR_VARS[c.pillar];
+  const card = document.createElement('div');
+  card.className = 'cc';
+  card.dataset.pillar = c.pillar;
+  card.style.setProperty('--ccpc', v.pc);
+  card.style.setProperty('--ccbg', v.bg);
+  card.innerHTML = `<div class="top">
+      <input type="checkbox" data-k="${c.k}">
+      <span class="cid">${c.id}</span>
+      <span class="tier">${c.tier}</span>
+      <span class="ntag ${c.type}">${c.type}</span>
+    </div>
+    <h4>${c.name}</h4>
+    <p>${c.objective}</p>`;
+  const checkbox = card.querySelector('input');
+  const toggle = () => { checkbox.checked = !checkbox.checked; sync(); };
+  card.addEventListener('click', e => { if(e.target !== checkbox) toggle(); else sync(); });
+  cgrid.appendChild(card);
+});
+
+function sync(){
+  document.querySelectorAll('.cc').forEach(card => {
+    const checked = card.querySelector('input').checked;
+    card.classList.toggle('picked', checked);
+  });
+  refreshTiers();
+  updateFigChosen();
+}
+
+/* ---------- chip filter ---------- */
+document.getElementById('chipRow').addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if(!btn) return;
+  document.querySelectorAll('#chipRow .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  document.querySelectorAll('.cc').forEach(card => {
+    card.style.display = (f === 'all' || card.dataset.pillar === f) ? '' : 'none';
+  });
+});
+
+/* ---------- tier snapshot ---------- */
+const TIER_TOTALS = {T1:0, T2:0, T3:0};
+CONTROLS.forEach(c => TIER_TOTALS[c.tier]++);
+const tiersGrid = document.getElementById('tiersGrid');
+TIER_META.forEach(t => {
+  const div = document.createElement('div');
+  div.className = `tier ${t.key.toLowerCase()}`;
+  div.innerHTML = `<div class="tbar"></div>
+    <div class="tn">${t.label}</div>
+    <div class="tnum" id="tnum-${t.key}">0 / ${TIER_TOTALS[t.key]} controls</div>
+    <p>${t.desc}</p>
+    <div class="tbarbg"><span class="tbarfill" id="tbar-${t.key}" style="width:0%"></span></div>
+    <div class="bd" id="tbd-${t.key}"></div>`;
+  tiersGrid.appendChild(div);
+});
+function refreshTiers(){
+  const checked = new Set(Array.from(document.querySelectorAll('.cc input:checked')).map(el => el.dataset.k));
+  TIER_META.forEach(t => {
+    const controlsInTier = CONTROLS.filter(c => c.tier === t.key);
+    const count = controlsInTier.filter(c => checked.has(c.k)).length;
+    document.getElementById(`tnum-${t.key}`).textContent = `${count} / ${TIER_TOTALS[t.key]} controls`;
+    document.getElementById(`tbar-${t.key}`).style.width = `${(count/TIER_TOTALS[t.key])*100}%`;
+    document.getElementById(`tbd-${t.key}`).textContent = controlsInTier.map(c => c.id).join(' · ');
+  });
+}
+refreshTiers();
+
+/* ---------- scenario buttons ---------- */
+let activeScenario = null;
+const scenGroup = document.getElementById('scenGroup');
+Object.entries(SCENARIOS).forEach(([key, s]) => {
+  const btn = document.createElement('button');
+  btn.className = 'scen-btn';
+  btn.innerHTML = `<span class="sname">${s.label}</span><span class="scode">${s.code.split(' ')[0]}</span>`;
+  btn.addEventListener('click', () => {
+    activeScenario = key;
+    document.querySelectorAll('.scen-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('runBtn').disabled = false;
+    document.getElementById('figScenario').textContent = s.label;
+    document.getElementById('figCode').textContent = s.code;
+  });
+  scenGroup.appendChild(btn);
+});
+
+function updateFigChosen(){
+  const n = document.querySelectorAll('.cc input:checked').length;
+  document.getElementById('figChosen').textContent = `${n} / 25`;
+}
+
+/* ---------- run simulation ---------- */
+const RADIUS = 32;
+const CIRC = 2 * Math.PI * RADIUS;
+document.getElementById('runBtn').addEventListener('click', () => {
+  if(!activeScenario) return;
+  const scenario = SCENARIOS[activeScenario];
+  const weights = scenario.weights;
+  const total = Object.values(weights).reduce((a,b) => a+b, 0);
+  const chosen = new Set(Array.from(document.querySelectorAll('.cc input:checked')).map(el => el.dataset.k));
+  const mitigated = Object.entries(weights).reduce((sum,[k,w]) => sum + (chosen.has(k) ? w : 0), 0);
+  let score = Math.round(100 - (mitigated/total) * 88);
+  score = Math.max(12, Math.min(100, score));
+  const tier = riskTierFor(score);
+
+  document.getElementById('gaugeRow').style.display = 'flex';
+  const ring = document.getElementById('gaugeRing');
+  ring.setAttribute('stroke-dasharray', CIRC.toFixed(1));
+  ring.style.strokeDashoffset = CIRC * (1 - score/100);
+  ring.style.stroke = tier.color;
+  document.getElementById('gaugeNum').textContent = score;
+  document.getElementById('gaugeNum').style.color = tier.color;
+  document.getElementById('statusText').textContent = tier.label;
+  document.getElementById('statusText').style.color = tier.color;
+
+  const gaps = Object.entries(weights)
+    .filter(([k]) => !chosen.has(k))
+    .sort((a,b) => b[1]-a[1])
+    .slice(0,3)
+    .map(([k]) => BY_KEY[k]);
+
+  document.getElementById('figGap').textContent = gaps.length ? gaps[0].id : 'None — fully covered';
+
+  const gapGrid = document.getElementById('gapGrid');
+  const gapEmpty = document.getElementById('gapEmpty');
+  gapGrid.innerHTML = '';
+  if(gaps.length === 0){
+    gapGrid.style.display = 'none';
+    gapEmpty.style.display = 'block';
+    gapEmpty.textContent = 'No gaps for this scenario — every relevant control is in place.';
+  } else {
+    gapEmpty.style.display = 'none';
+    gapGrid.style.display = 'grid';
+    gaps.forEach((g, i) => {
+      const div = document.createElement('div');
+      div.className = 'gap-card';
+      div.innerHTML = `<div class="gap-num">${i+1}</div>
+        <div class="gap-body"><span class="cid">${g.id} · ${g.pillar}</span>
+        <h4>${g.name}</h4><p>${g.objective}</p></div>`;
+      gapGrid.appendChild(div);
+    });
+  }
+  document.getElementById('resultsActions').style.display = 'flex';
+  window._lastResult = {scenario: scenario.label, code: scenario.code, score, tier: tier.label, gaps, chosenCount: chosen.size};
+});
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const r = window._lastResult;
+  if(!r) return;
+  const lines = [
+    `AGSC Conformance Scanner — COHUMAIN Labs & SafeAlign AI`,
+    `Scenario: ${r.scenario} (${r.code})`,
+    `Exposure score: ${r.score}/100 (${r.tier})`,
+    `Controls in place: ${r.chosenCount}/25`,
+    `Top gaps:`,
+    ...r.gaps.map(g => `  • ${g.id} — ${g.name}`)
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const note = document.getElementById('copyNote');
+    note.classList.add('show');
+    setTimeout(() => note.classList.remove('show'), 1600);
+  });
+});
+</script>
+</body>
+</html>
