@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1100 900" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#8A97A6"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="1100" height="900" fill="#FFFFFF"/>
+<text x="550" y="34" font-family="Poppins, sans-serif" font-size="21" font-weight="800" fill="#081828" text-anchor="middle"><tspan x="550" dy="0">Article 50 (EU AI Act) x AGSC — Mental Map</tspan></text>
+<text x="550" y="56" font-family="Inter, sans-serif" font-size="13.5" fill="#5C6B7A" text-anchor="middle">How the four Article 50 transparency obligations map to AGSC controls</text>
+<circle cx="550" cy="425" r="100" fill="#F2ECFC" stroke="#7A4FD6" stroke-width="2.5"/>
+<text x="550" y="411" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" fill="#7A4FD6" text-anchor="middle">ALN-05</text>
+<text x="550" y="433" font-family="Inter, sans-serif" font-size="12" fill="#081828" text-anchor="middle"><tspan x="550" dy="0">Output Labeling &amp;</tspan><tspan x="550" dy="15">Action Attribution</tspan></text>
+<text x="550" y="480" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#5C6B7A" text-anchor="middle">ANCHOR CONTROL</text>
+<rect x="30" y="90" width="320" height="190" rx="16" fill="#FFFFFF" stroke="#E4EAF2" stroke-width="1.5"/>
+<rect x="46" y="106" width="92" height="26" rx="13.0" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="92.0" y="123.375" font-family="JetBrains Mono, monospace" font-size="12.5" font-weight="700" fill="#1F7DF0" text-anchor="middle">Art. 50(1)</text>
+<rect x="242" y="106" width="92" height="26" rx="13.0" fill="#F2ECFC" stroke="#7A4FD6" stroke-width="1.3"/><text x="288.0" y="122.675" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#7A4FD6" text-anchor="middle">PROVIDER</text>
+<text x="46" y="158" font-family="Poppins, sans-serif" font-size="15.5" font-weight="700" fill="#081828" text-anchor="start"><tspan x="46" dy="0">AI Interaction</tspan><tspan x="46" dy="19">Disclosure</tspan></text>
+<rect x="46" y="234" width="138" height="34" rx="8" fill="#E5F6EE" stroke="#17A45A" stroke-width="1.3"/><text x="56" y="249" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#17A45A">SEC-01</text><text x="56" y="262" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Multi-Agent Coord.</text>
+<rect x="192" y="234" width="138" height="34" rx="8" fill="#FCEDED" stroke="#E5484D" stroke-width="1.3"/><text x="202" y="249" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#E5484D">SAF-01</text><text x="202" y="262" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Autonomous Oversight</text>
+<line x1="350" y1="270" x2="478" y2="353" stroke="#8A97A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="750" y="90" width="320" height="190" rx="16" fill="#FFFFFF" stroke="#E4EAF2" stroke-width="1.5"/>
+<rect x="766" y="106" width="92" height="26" rx="13.0" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="812.0" y="123.375" font-family="JetBrains Mono, monospace" font-size="12.5" font-weight="700" fill="#1F7DF0" text-anchor="middle">Art. 50(2)</text>
+<rect x="962" y="106" width="92" height="26" rx="13.0" fill="#F2ECFC" stroke="#7A4FD6" stroke-width="1.3"/><text x="1008.0" y="122.675" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#7A4FD6" text-anchor="middle">PROVIDER</text>
+<text x="766" y="158" font-family="Poppins, sans-serif" font-size="15.5" font-weight="700" fill="#081828" text-anchor="start"><tspan x="766" dy="0">Synthetic Content</tspan><tspan x="766" dy="19">Marking</tspan></text>
+<rect x="766" y="234" width="138" height="34" rx="8" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="776" y="249" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1F7DF0">GOV-01</text><text x="776" y="262" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Data Provenance</text>
+<rect x="912" y="234" width="138" height="34" rx="8" fill="#FCEDED" stroke="#E5484D" stroke-width="1.3"/><text x="922" y="249" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#E5484D">SAF-04</text><text x="922" y="262" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Anti-Hallucination</text>
+<line x1="750" y1="270" x2="622" y2="353" stroke="#8A97A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="590" width="320" height="190" rx="16" fill="#FFFFFF" stroke="#E4EAF2" stroke-width="1.5"/>
+<rect x="46" y="606" width="92" height="26" rx="13.0" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="92.0" y="623.375" font-family="JetBrains Mono, monospace" font-size="12.5" font-weight="700" fill="#1F7DF0" text-anchor="middle">Art. 50(3)</text>
+<rect x="242" y="606" width="92" height="26" rx="13.0" fill="#E5F6EE" stroke="#17A45A" stroke-width="1.3"/><text x="288.0" y="622.675" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#17A45A" text-anchor="middle">DEPLOYER</text>
+<text x="46" y="658" font-family="Poppins, sans-serif" font-size="15.5" font-weight="700" fill="#081828" text-anchor="start"><tspan x="46" dy="0">Emotion / Biometric</tspan><tspan x="46" dy="19">Disclosure</tspan></text>
+<rect x="46" y="734" width="138" height="34" rx="8" fill="#E5F6EE" stroke="#17A45A" stroke-width="1.3"/><text x="56" y="749" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#17A45A">SEC-07</text><text x="56" y="762" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Memory Lifecycle</text>
+<rect x="192" y="734" width="138" height="34" rx="8" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="202" y="749" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1F7DF0">GOV-01</text><text x="202" y="762" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Data Provenance</text>
+<line x1="350" y1="590" x2="478" y2="497" stroke="#8A97A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="750" y="590" width="320" height="190" rx="16" fill="#FFFFFF" stroke="#E4EAF2" stroke-width="1.5"/>
+<rect x="766" y="606" width="92" height="26" rx="13.0" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="812.0" y="623.375" font-family="JetBrains Mono, monospace" font-size="12.5" font-weight="700" fill="#1F7DF0" text-anchor="middle">Art. 50(4)</text>
+<rect x="962" y="606" width="92" height="26" rx="13.0" fill="#E5F6EE" stroke="#17A45A" stroke-width="1.3"/><text x="1008.0" y="622.675" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#17A45A" text-anchor="middle">DEPLOYER</text>
+<text x="766" y="658" font-family="Poppins, sans-serif" font-size="15.5" font-weight="700" fill="#081828" text-anchor="start"><tspan x="766" dy="0">Deepfake &amp; Public-</tspan><tspan x="766" dy="19">Interest Text</tspan></text>
+<rect x="766" y="734" width="138" height="34" rx="8" fill="#FCEDED" stroke="#E5484D" stroke-width="1.3"/><text x="776" y="749" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#E5484D">SAF-03</text><text x="776" y="762" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Content Safety</text>
+<rect x="912" y="734" width="138" height="34" rx="8" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3"/><text x="922" y="749" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1F7DF0">GOV-04</text><text x="922" y="762" font-family="Inter, sans-serif" font-size="9" fill="#5C6B7A">Training Governance</text>
+<line x1="750" y1="590" x2="622" y2="497" stroke="#8A97A6" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="340" y="800" width="420" height="70" rx="12" fill="#E9F2FE" stroke="#1F7DF0" stroke-width="1.3" stroke-dasharray="4,3"/>
+<text x="550.0" y="826" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#081828" text-anchor="middle">Art. 50(5): clear, distinguishable, accessible &amp; timely</text>
+<text x="550.0" y="845" font-family="Inter, sans-serif" font-size="11" fill="#5C6B7A" text-anchor="middle">Kept current by GOV-02 (AI Change Governance)</text>
+<line x1="550" y1="525" x2="550.0" y2="800" stroke="#7A4FD6" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
