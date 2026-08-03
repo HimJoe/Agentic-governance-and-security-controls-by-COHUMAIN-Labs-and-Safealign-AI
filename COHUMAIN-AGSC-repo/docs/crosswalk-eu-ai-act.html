@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AGSC × EU AI Act — Article 50 Crosswalk | COHUMAIN Labs & SafeAlign AI</title>
+<meta name="description" content="How the Agentic Governance & Security Controls standard maps to the EU AI Act's Article 50 transparency obligations, plus a full article-by-article crosswalk." />
+<meta name="theme-color" content="#1F7DF0" />
+<link rel="icon" type="image/png" href="assets/cohumain-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#081828; --ink-soft:#26323F; --muted:#5C6B7A; --faint:#8A97A6;
+  --blue:#1F7DF0; --blue-d:#0A63D6; --purple:#6A45C8; --green:#17A45A; --graphite:#2C3A44;
+  --bg:#FFFFFF; --soft:#F5F8FC; --soft2:#ECF2FB; --line:#E4EAF2; --line-2:#D7E0EC;
+  --saf:#E5484D; --aln:#7A4FD6; --gov:#1F7DF0; --sec:#17A45A;
+  --saf-bg:#FCEDED; --aln-bg:#F2ECFC; --gov-bg:#E9F2FE; --sec-bg:#E5F6EE;
+  --native:#E5484D; --adapted:#17A45A;
+  --maxw:1180px; --shadow:0 1px 2px rgba(8,24,40,.04),0 8px 24px rgba(8,24,40,.06);
+  --shadow-lg:0 12px 40px rgba(8,24,40,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink-soft);font-family:'Inter',system-ui,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.16;letter-spacing:-.01em;color:var(--ink)}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.gradtext{background:linear-gradient(100deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+section[id],header[id]{scroll-margin-top:82px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand img{height:42px;width:42px;border-radius:50%}
+.brand .bt{font-family:'Poppins';font-weight:700;font-size:16px;letter-spacing:-.02em;line-height:1.05}
+.brand .bt .a{color:var(--blue)} .brand .bt .b{color:var(--ink)}
+.brand .bt small{display:block;font-size:10.5px;font-weight:500;color:var(--faint);letter-spacing:.02em}
+.nav-links{display:flex;gap:24px;align-items:center;font-size:14.5px;color:var(--ink-soft);font-weight:500}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 20px;border-radius:100px;font-weight:600;font-size:13.5px;box-shadow:0 4px 14px rgba(31,125,240,.28)}
+.nav-back{color:var(--muted);font-weight:500}
+.nav-back:hover{color:var(--blue)}
+@media(max-width:920px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;padding:64px 0 48px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--soft) 100%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(31,125,240,.10) 1px,transparent 0);background-size:30px 30px;mask-image:radial-gradient(ellipse 70% 60% at 75% 25%,#000,transparent 75%);opacity:.7}
+.hero-in{position:relative;z-index:2;max-width:860px}
+.crumb{font-size:13px;color:var(--faint);margin-bottom:18px}
+.crumb a:hover{color:var(--blue)}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--blue);border:1px solid var(--line-2);background:#fff;padding:7px 15px;border-radius:100px;margin-bottom:24px;box-shadow:var(--shadow)}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(23,164,90,.5);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(23,164,90,.45)}70%{box-shadow:0 0 0 9px rgba(23,164,90,0)}100%{box-shadow:0 0 0 0 rgba(23,164,90,0)}}
+.hero h1{font-size:clamp(28px,4.2vw,44px);font-weight:800;margin-bottom:18px;letter-spacing:-.02em}
+.hero p.lead{font-size:clamp(15.5px,1.8vw,17.5px);color:var(--muted);max-width:700px;margin-bottom:22px}
+.notice{background:#fff;border:1px solid var(--line-2);border-radius:14px;padding:16px 20px;font-size:13px;color:var(--muted);box-shadow:var(--shadow);max-width:760px}
+.notice b{color:var(--ink)}
+.stat-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.stat{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.stat .n{font-family:'Poppins';font-size:26px;font-weight:800;line-height:1}
+.stat .l{font-size:12px;color:var(--muted);margin-top:6px}
+.stat.s1 .n{color:var(--blue)} .stat.s2 .n{color:var(--purple)} .stat.s3 .n{color:var(--green)}
+
+section.block{padding:60px 0}
+.soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{margin-bottom:32px;max-width:800px}
+.sec-tag{font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.sec-head h2{font-size:clamp(24px,3vw,34px);margin-bottom:12px;letter-spacing:-.02em}
+.sec-head p{color:var(--muted);font-size:15.5px}
+
+/* obligation cards */
+.obl-grid{display:grid;grid-template-columns:1fr;gap:18px}
+.obl{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.obl::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--gov)}
+.obl-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.obl-para{font-family:'JetBrains Mono';font-size:12.5px;font-weight:700;color:var(--gov);background:var(--gov-bg);padding:4px 10px;border-radius:7px}
+.obl-who{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:6px}
+.obl-who.provider{background:var(--aln-bg);color:var(--aln)}
+.obl-who.deployer{background:var(--sec-bg);color:var(--sec)}
+.obl h3{font-size:19px;margin-bottom:10px}
+.obl > p.desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;max-width:760px}
+.obl .exc{font-size:12.5px;color:var(--faint);margin-bottom:18px;padding-left:14px;border-left:2px solid var(--line-2)}
+.map-lbl{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.ctl-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.ctl-pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono';font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:8px;border:1px solid var(--line-2)}
+.ctl-pill.primary{font-weight:700}
+.how-box{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink-soft)}
+.how-box b{color:var(--ink)}
+
+/* full crosswalk table */
+.xw-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);font-size:13px}
+.xw-table th{background:var(--soft);text-align:left;padding:11px 14px;font-family:'Poppins';font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--line)}
+.xw-table td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+.xw-table tr:last-child td{border-bottom:none}
+.xw-table .cid{font-family:'JetBrains Mono';font-weight:700;font-size:12px}
+.xw-table .art50{background:var(--gov-bg);color:var(--blue-d);font-weight:700;border-radius:6px;padding:2px 6px;font-family:'JetBrains Mono';font-size:11.5px}
+.table-wrap{overflow-x:auto;border-radius:14px}
+.xw-note{font-size:12.5px;color:var(--faint);margin-top:14px}
+
+footer{border-top:1px solid var(--line);background:var(--soft);padding:36px 0 30px}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--faint)}
+.foot-bottom a{color:var(--blue)}
+.disclaimer{font-size:12px;color:var(--faint);margin-top:8px;max-width:900px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="brand">
+      <img src="assets/cohumain-logo.png" alt="COHUMAIN Labs" />
+      <span class="bt"><span class="a">AGSC</span> <span class="b">Crosswalk</span><small>Agentic Governance &amp; Security Controls</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#article50">Article 50</a>
+      <a href="#fullcrosswalk">Full crosswalk</a>
+      <a href="scanner.html">Scanner</a>
+      <a class="nav-back" href="index.html">← Full standard</a>
+    </div>
+    <a class="nav-cta" href="https://github.com/HimJoe/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/blob/main/frameworks/regulatory-crosswalk.md" target="_blank" rel="noopener">★ GitHub</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-in">
+    <div class="crumb"><a href="index.html">AGSC Standard</a> → Crosswalks → EU AI Act, Article 50</div>
+    <span class="eyebrow"><span class="pulse"></span> Regulatory Crosswalk · In force from 2 Aug 2026</span>
+    <h1>AGSC × the EU AI Act's <span class="gradtext">Article 50</span> transparency obligations.</h1>
+    <p class="lead">Article 50 of Regulation (EU) 2024/1689 is the EU AI Act's core transparency provision: it requires disclosure whenever a person interacts with an AI system, whenever content is synthetically generated, whenever emotion recognition or biometric categorisation is used, and whenever a deepfake or AI-generated public-interest text is published. Below is how the AGSC standard's controls operationalize each obligation, plus the full article-by-article crosswalk.</p>
+    <div class="notice"><b>Not legal advice.</b> This crosswalk is informational and reflects our reading of Article 50 as of August 2026. Verify against the official text of Regulation (EU) 2024/1689 and the AI Office's transparency guidelines before relying on it for compliance.</div>
+    <div class="stat-row">
+      <div class="stat s1"><div class="n">4</div><div class="l">Article 50 obligations mapped</div></div>
+      <div class="stat s2"><div class="n">7</div><div class="l">AGSC controls engaged</div></div>
+      <div class="stat s3"><div class="n">25</div><div class="l">Controls in the full crosswalk</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE 50 DEEP DIVE -->
+<section class="block" id="article50">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">The deep dive</div>
+      <h2>Article 50, obligation by obligation</h2>
+      <p>Each paragraph creates a distinct disclosure duty, owed by a different party, at a different moment. AGSC's <span class="mono">ALN-05</span> (Output Labeling &amp; Action Attribution) is the anchor control for all four; the supporting controls are what make the disclosure accurate, persistent, and current.</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:36px;">
+      <img src="assets/article50-mindmap.svg" alt="Mental map: ALN-05 as the anchor control connecting to the four Article 50 obligations and their supporting AGSC controls" style="width:100%;height:auto;display:block;" />
+    </div>
+
+    <div class="obl-grid">
+
+      <div class="obl">
+        <div class="obl-top">
+          <span class="obl-para">Art. 50(1)</span>
+          <span class="obl-who provider">Provider obligation</span>
+          <h3 style="margin:0;flex:1">AI interaction disclosure</h3>
+        </div>
+        <p class="desc">Systems designed to interact directly with people, chatbots, voice agents, avatars, must be built so the person is clearly informed they're talking to an AI, unless that's already obvious from context.</p>
+        <p class="exc">Exempt for AI systems authorised by law to detect, prevent, investigate or prosecute crime, unless the system is publicly available for reporting offences.</p>
+        <div class="map-lbl">Mapped AGSC controls</div>
+        <div class="ctl-row">
+          <span class="ctl-pill primary" style="border-color:var(--aln);color:var(--aln);background:var(--aln-bg)">ALN-05 · primary</span>
+          <span class="ctl-pill" style="border-color:var(--sec);color:var(--sec)">SEC-01</span>
+          <span class="ctl-pill" style="border-color:var(--saf);color:var(--saf)">SAF-01</span>
+        </div>
+        <div class="how-box"><b>How AGSC operationalizes it:</b> ALN-05 requires AI-generated content and agent actions to be attributed to the agent, with labelling that persists downstream and isn't stripped on export. SEC-01 keeps that disclosure intact across multi-agent handoffs, so a person still knows they're dealing with an AI after a delegation chain. SAF-01's behavioural baseline flags an agent that starts acting in ways indistinguishable from a human, before it becomes a disclosure failure.</div>
+      </div>
+
+      <div class="obl">
+        <div class="obl-top">
+          <span class="obl-para">Art. 50(2)</span>
+          <span class="obl-who provider">Provider obligation</span>
+          <h3 style="margin:0;flex:1">Machine-readable marking of synthetic content</h3>
+        </div>
+        <p class="desc">Providers of systems generating synthetic audio, image, video or text, including general-purpose AI systems, must mark outputs in a machine-readable format that's detectable as artificially generated or manipulated, using solutions that are effective, interoperable, robust and reliable as far as technically feasible.</p>
+        <div class="map-lbl">Mapped AGSC controls</div>
+        <div class="ctl-row">
+          <span class="ctl-pill primary" style="border-color:var(--aln);color:var(--aln);background:var(--aln-bg)">ALN-05 · primary</span>
+          <span class="ctl-pill" style="border-color:var(--gov);color:var(--gov)">GOV-01</span>
+          <span class="ctl-pill" style="border-color:var(--saf);color:var(--saf)">SAF-04</span>
+        </div>
+        <div class="how-box"><b>How AGSC operationalizes it:</b> ALN-05's downstream-persistence requirement is the direct match for "detectable... not stripped on export." GOV-01 (Data Provenance &amp; Input Integrity) is the natural home for the machine-readable mark itself, provenance metadata carried with the output. SAF-04's output-accuracy pipeline is where marking logic typically gets wired into the generation path.</div>
+      </div>
+
+      <div class="obl">
+        <div class="obl-top">
+          <span class="obl-para">Art. 50(3)</span>
+          <span class="obl-who deployer">Deployer obligation</span>
+          <h3 style="margin:0;flex:1">Emotion recognition &amp; biometric categorisation disclosure</h3>
+        </div>
+        <p class="desc">Deployers of an emotion-recognition or biometric-categorisation system must inform the natural persons exposed to it about the system's operation, and process any related biometric data in accordance with applicable law.</p>
+        <p class="exc">Subject to law-enforcement exceptions and to data-protection obligations under separate EU law.</p>
+        <div class="map-lbl">Mapped AGSC controls</div>
+        <div class="ctl-row">
+          <span class="ctl-pill primary" style="border-color:var(--aln);color:var(--aln);background:var(--aln-bg)">ALN-05 · primary</span>
+          <span class="ctl-pill" style="border-color:var(--sec);color:var(--sec)">SEC-07</span>
+          <span class="ctl-pill" style="border-color:var(--gov);color:var(--gov)">GOV-01</span>
+        </div>
+        <div class="how-box"><b>How AGSC operationalizes it:</b> SEC-07 (Memory &amp; Context Lifecycle Security) governs exactly the sensitive-data category this obligation is about, isolating, retaining and expiring biometric and emotional-state data so exposure is bounded even where disclosure has occurred. GOV-01 covers the lineage and integrity of the biometric inputs the categorisation system consumes.</div>
+      </div>
+
+      <div class="obl">
+        <div class="obl-top">
+          <span class="obl-para">Art. 50(4)</span>
+          <span class="obl-who deployer">Deployer obligation</span>
+          <h3 style="margin:0;flex:1">Deepfake &amp; public-interest AI-text disclosure</h3>
+        </div>
+        <p class="desc">Deployers of a system that generates or manipulates image, audio or video content amounting to a deepfake must disclose that origin. Separately, deployers publishing AI-generated or AI-manipulated text to inform the public on matters of public interest must disclose that too.</p>
+        <p class="exc">Exempt for law-enforcement use; lighter-touch disclosure for evidently artistic, creative, satirical or fictional work; text exception where a human has reviewed and takes editorial responsibility for the content.</p>
+        <div class="map-lbl">Mapped AGSC controls</div>
+        <div class="ctl-row">
+          <span class="ctl-pill primary" style="border-color:var(--aln);color:var(--aln);background:var(--aln-bg)">ALN-05 · primary</span>
+          <span class="ctl-pill" style="border-color:var(--saf);color:var(--saf)">SAF-03</span>
+          <span class="ctl-pill" style="border-color:var(--gov);color:var(--gov)">GOV-04</span>
+        </div>
+        <div class="how-box"><b>How AGSC operationalizes it:</b> SAF-03 (Content Safety &amp; Misuse Prevention) names deepfakes and synthetic-media misuse as an in-scope harm category. GOV-04 governs the training of any generative model capable of deepfake-grade output, which is where a provenance-preserving, disclosure-friendly design decision has to be made in the first place.</div>
+      </div>
+
+    </div>
+
+    <p class="xw-note">Paragraph 50(5) additionally requires that all of the above information be provided clearly, distinguishably, accessibly, and no later than the first interaction or exposure, generic references buried in terms and conditions don't satisfy it. AGSC's <span class="mono">GOV-02</span> (AI Change Governance) is what keeps disclosure mechanisms current as output channels and workflows change.</p>
+  </div>
+</section>
+
+<!-- FULL CROSSWALK -->
+<section class="block soft" id="fullcrosswalk">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">In context</div>
+      <h2>The full AGSC × EU AI Act crosswalk</h2>
+      <p>Article 50 is one part of a wider mapping. Every one of the 25 AGSC controls traces to the EU AI Act, NIST AI RMF, and ISO/IEC 42001, here's the EU AI Act column in full; the row highlighted below is the transparency obligation this page focuses on.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="xw-table">
+        <thead><tr><th>Control</th><th>Name</th><th>Pillar</th><th>EU AI Act</th></tr></thead>
+        <tbody id="xwBody"></tbody>
+      </table>
+    </div>
+    <p class="xw-note">Full crosswalk including NIST AI RMF and ISO/IEC 42001 columns: <a href="https://github.com/HimJoe/Agentic-governance-and-security-controls-by-COHUMAIN-Labs-and-Safealign-AI/blob/main/frameworks/regulatory-crosswalk.md" target="_blank" rel="noopener" style="color:var(--blue)">frameworks/regulatory-crosswalk.md →</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>An open standard by <a href="https://www.cohumain.ai/research" target="_blank" rel="noopener">COHUMAIN Labs</a> &amp; <a href="https://safealignai.io/" target="_blank" rel="noopener">SafeAlign AI</a>, CC BY 4.0.</span>
+      <span><a href="index.html">← Back to the standard</a> · <a href="scanner.html">Try the scanner →</a></span>
+    </div>
+    <p class="disclaimer">This crosswalk is provided for informational purposes only and does not constitute legal advice. EU AI Act summaries are our own paraphrase of Regulation (EU) 2024/1689; review the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener" style="color:var(--blue)">official consolidated text</a> and the European Commission's transparency guidelines for anything you rely on.</p>
+  </div>
+</footer>
+
+<script>
+const XW = [
+  ['SAF-01','Autonomous System Oversight','Safety','Art. 14, 15'],
+  ['SAF-02','Emergency Stop & Containment (Kill Switch)','Safety','Art. 14, 15'],
+  ['SAF-03','Content Safety & Misuse Prevention','Safety','Art. 15, <span class="art50">50(4)</span>'],
+  ['SAF-04','Output Factual Accuracy & Anti-Hallucination','Safety','Art. 15, <span class="art50">50(2)</span>'],
+  ['SAF-05','AI Output Monitoring & Safeguards','Safety','Art. 15, 72'],
+  ['ALN-01','Autonomy Boundary Control','Alignment','Art. 14'],
+  ['ALN-02','Human Oversight & Intervention','Alignment','Art. 14'],
+  ['ALN-03','Decision Interpretability','Alignment','Art. 13'],
+  ['ALN-04','Model Explainability','Alignment','Art. 13'],
+  ['ALN-05','Output Labeling & Action Attribution','Alignment','<span class="art50">Art. 50(1)–(4)</span>'],
+  ['GOV-01','Data Provenance & Input Integrity','Governance','Art. 10, <span class="art50">50(2),(3)</span>'],
+  ['GOV-02','AI Change Governance','Governance','Art. 9, 17, <span class="art50">50(5)</span>'],
+  ['GOV-03','Third-Party & Supply-Chain Oversight','Governance','Art. 25'],
+  ['GOV-04','Model Training Governance','Governance','Art. 10, <span class="art50">50(4)</span>'],
+  ['GOV-05','Model Evaluation','Governance','Art. 15'],
+  ['GOV-06','Model Continuous Improvement & Drift Management','Governance','Art. 72'],
+  ['GOV-07','AI Lifecycle & Registry Management','Governance','Art. 11, 17'],
+  ['GOV-08','Environmental & Carbon Governance','Governance','Art. 40 (rec.)'],
+  ['SEC-01','Multi-Agent Coordination Security','Security','Art. 15, <span class="art50">50(1)</span>'],
+  ['SEC-02','Agent Identity & Least-Privilege Authorization','Security','Art. 15'],
+  ['SEC-03','Prompt Injection & Adversarial Input Defense','Security','Art. 15'],
+  ['SEC-04','Observability, Anomaly Detection & Incident Response','Security','Art. 12, 15, 72'],
+  ['SEC-05','AI Threat Modeling','Security','Art. 9, 15'],
+  ['SEC-06','AI Security Testing & Red-Teaming','Security','Art. 15'],
+  ['SEC-07','Memory & Context Lifecycle Security','Security','Art. 10, 15, <span class="art50">50(3)</span>']
+];
+const PILLAR_COLOR = {Safety:'var(--saf)', Alignment:'var(--aln)', Governance:'var(--gov)', Security:'var(--sec)'};
+const tbody = document.getElementById('xwBody');
+XW.forEach(([id,name,pillar,eu]) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="cid" style="color:${PILLAR_COLOR[pillar]}">${id}</td><td>${name}</td><td>${pillar}</td><td>${eu}</td>`;
+  tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>
