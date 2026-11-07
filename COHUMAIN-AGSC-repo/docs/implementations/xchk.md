@@ -21,16 +21,25 @@ https://in.xchk.io/agsc-assessment.html
 | Tier 3 adds (7) | 2 | 1 | 4 |
 | **All 25** | **13** | **5** | **7** |
 
-**MEETS** = the component alone produces the control's named evidence, and that evidence is machine-verifiable.
-**PARTIAL** = the technical half is the component's; the organisational half (minutes, runbooks, reviews) is
-the deployer's. **N/A** = a model-lifecycle or content control outside what the component does, by design.
+**MEETS** = within the surface a component has, every requirement is held, and the evidence for it is
+machine-verifiable. Where a requirement is the organisation's own act (a reviewer's signature on minutes, a
+calendar, a host-level isolation outside the component), the row's last clause names it. No control in this
+note is met by the component without the organisation; that is what "component" means here, and the number 13
+should be read that way, not as 13 controls an organisation could declare on the strength of this component
+alone. **PARTIAL** = the technical core is the component's and a substantive requirement of the control itself is
+not. **N/A** = outside the component's scope by design: model lifecycle, generated content, procurement,
+sustainability.
+
+Five of the 13 are scoped to the surface a component has and say so in the verdict column: `SAF-02` application
+layer, `ALN-03` agentic surface, `ALN-05` the action half, `GOV-07` agentic artefacts, `SEC-05` the component's
+own system.
 
 ## Per control
 
 | Control | Tier | Verdict | Evidence, in one line |
 |---|---|---|---|
-| SAF-01 | T1 | MEETS | Per-action sealed trace with actor, action, target and the agent's stated rationale; seven standing deviation watches wired to the owner's phone; a generated monthly review pack with a sign-off block |
-| SAF-02 | T1 | MEETS (application layer) | One-call emergency stop at plate, host, org or registry scope; every action refused before any grant is read; registry-signed stop statement verified on the host; measured 20/20 halted, 9 ms median, 221 ms p95 against the 5 s SLA |
+| SAF-01 | T1 | MEETS | Per-action sealed trace with actor, action, target and the agent's stated rationale; seven standing deviation watches wired to the owner's phone; a generated monthly review pack with the thresholds, what tripped and each disposition; the reviewer's signature on it is the organisation's |
+| SAF-02 | T1 | MEETS (application layer) | One-call emergency stop at plate, host, org or registry scope; every action refused before any grant is read; registry-signed stop statement verified on the host; credential revoked; measured 20/20 halted, 9 ms median, 221 ms p95 against the 5 s SLA, on every release; isolating connectors and processes the component does not govern, and the monthly drill record, are the organisation's |
 | SAF-03 | T1 | N/A | Content safety on generative output is a different product |
 | SAF-04 | T2 | N/A | Factual accuracy is the model layer's |
 | SAF-05 | T2 | PARTIAL | Human gate before a regulated act, with a signed, offline-verifiable approval record; output bias and drift monitoring is the model layer's |
@@ -61,6 +70,7 @@ The core argument holds up in practice: for an agent, "what may it do" and "what
 to do" are one problem, and the eight AI-native controls are the right eight to call new.
 
 The one thing the implementer missed is an **evidence grade**. Every evidence item in v1.0.0 is a document the
-deployer writes about itself; three Foundational-tier controls accept "approval records" without saying who
-approved, how the record is bound to the act, or whether anyone outside the deployer can check it. The proposal
+deployer writes about itself; two Foundational-tier controls (`ALN-02`, `SEC-02`) and one Tier 2 control
+(`SAF-05`, for regulated outputs) accept "approval records" without saying who approved, how the record is
+bound to the act, or whether anyone outside the deployer can check it. The proposal
 is in `docs/conformance.md` under "Evidence grade (proposed)".
